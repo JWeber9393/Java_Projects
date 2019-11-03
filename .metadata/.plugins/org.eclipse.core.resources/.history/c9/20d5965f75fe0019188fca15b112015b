@@ -12,11 +12,10 @@
  * =========
  * 
  * This animation displays: 
- * -Color Change
- * -A Shrinking/Expanding Ball
- * -Linear Movement
- * -Circular Movement
- * -Simple fillString()
+ * Color Change
+ * A Shrinking/Expanding Ball
+ * Linear Movement
+ * Circular Movement
  * 
  * 
  * @author Joey Weber

@@ -12,11 +12,10 @@
  * =========
  * 
  * This animation displays: 
- * -Color Change
- * -A Shrinking/Expanding Ball
- * -Linear Movement
- * -Circular Movement
- * -Simple fillString()
+ * Color Change
+ * A Shrinking/Expanding Ball
+ * Linear Movement
+ * Circular Movement
  * 
  * 
  * @author Joey Weber
@@ -36,6 +35,7 @@ public class Animation {
 	/**
 	 * once animate is called animation of a ball commences
 	 * it displays various animations
+	 * nothing is returned
 	 * 
 	 * @param win takes in the DrawingPanel win created in the main method
 	 * @param pen takes in the Graphics pen created in the main method
@@ -88,21 +88,6 @@ public class Animation {
 			colorChange(pen, hue, s, br);	//strobing animation
 		}
 		
-		/*
-		 * This block of code was the more complicated to calculate
-		 * the previous two circles are programmed to move oppositely in a circular path.
-		 * The sine methods move the u and y coordinates of the circles
-		 * while cos moves x and v 
-		 * 
-		 * The loop goes to 180 because that it represents 180 degrees (half a rotation).
-		 * The sin and cos methods require radians so 'i' degrees is converted into radians; i*(pi / 180).
-		 * Because the window's center isn't (0,0), i needed to calculate the a, b, c, and f
-		 * so that they would rotate roughly around (400,400).
-		 * 
-		 * Finally, I needed to type cast a, b, c, and f to int
-		 * after calculating them as doubles to ensure smooth animation.
-		 * 
-		 */
 		for(int i = 0; i <= 180; i++) {
 			pen.fillOval(x, y, d, d);
 			pen.fillOval(v, u, d, d);
@@ -116,8 +101,9 @@ public class Animation {
 			u = (int) f;
 			y = (int) a;
 			
-			colorChange(pen, hue, s, br);	//strobing
+			colorChange(pen, hue, s, br);
 			sleepClear(win, 1);
+			System.out.println(x+" "+y);
 		}
 		
 		while(x != w/2 && v != w/2) {
@@ -146,35 +132,18 @@ public class Animation {
 			y = (h/2-d/2);
 			win.sleep(1);
 		}
-		
-		//Create ending title card
 		pen.setColor(Color.RED);
-		pen.drawString("\"Strobe-splosion!!\"", w/2-50, h/2);	//places animation title near the center at the end
+		pen.drawString("\"Strobe-splosion\"", w/2-50, h/2);	//places animation title near the center at the end
 	}
 	
-	/**
-	 * sets pen color to a random color value and returns it
-	 * 
-	 * @param pen is the pen with the current color
-	 * @param h is the float hue value
-	 * @param s is the float saturation value
-	 * @param b is the float brightness value
-	 * @return Graphics pen with new random color is returned
-	 */
+	
 	private static Graphics colorChange(Graphics pen, float h, float s, float b) {
 		h += Math.random();
 		s += Math.random();
 		b += 5;
-		pen.setColor(Color.getHSBColor(h, s, b));	//calculates new color value 
+		pen.setColor(Color.getHSBColor(h, s, b));
 		return pen;
 	}
-	
-	/**
-	 * just a small helper method that sets the window sleep and clear method, which is used multiple times.
-	 * 
-	 * @param win the window that was created at the beginning of the application
-	 * @param t is the time interval in milliseconds at which the loop sleeps, creating the animation effect.
-	 */
 	private static void sleepClear(DrawingPanel win, int t) {
 		win.sleep(t);
 		win.clear();

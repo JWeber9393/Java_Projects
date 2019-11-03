@@ -12,11 +12,10 @@
  * =========
  * 
  * This animation displays: 
- * -Color Change
- * -A Shrinking/Expanding Ball
- * -Linear Movement
- * -Circular Movement
- * -Simple fillString()
+ * Color Change
+ * A Shrinking/Expanding Ball
+ * Linear Movement
+ * Circular Movement
  * 
  * 
  * @author Joey Weber
@@ -87,7 +86,6 @@ public class Animation {
 			sleepClear(win, 1);
 			colorChange(pen, hue, s, br);	//strobing animation
 		}
-		
 		/*
 		 * This block of code was the more complicated to calculate
 		 * the previous two circles are programmed to move oppositely in a circular path.
@@ -99,8 +97,7 @@ public class Animation {
 		 * Because the window's center isn't (0,0), i needed to calculate the a, b, c, and f
 		 * so that they would rotate roughly around (400,400).
 		 * 
-		 * Finally, I needed to type cast a, b, c, and f to int
-		 * after calculating them as doubles to ensure smooth animation.
+		 * Finally, I needed to type cast a, b, c, and f to int after calculating them as doubles to ensure smooth animation
 		 * 
 		 */
 		for(int i = 0; i <= 180; i++) {
@@ -116,7 +113,7 @@ public class Animation {
 			u = (int) f;
 			y = (int) a;
 			
-			colorChange(pen, hue, s, br);	//strobing
+			colorChange(pen, hue, s, br);
 			sleepClear(win, 1);
 		}
 		
@@ -149,7 +146,7 @@ public class Animation {
 		
 		//Create ending title card
 		pen.setColor(Color.RED);
-		pen.drawString("\"Strobe-splosion!!\"", w/2-50, h/2);	//places animation title near the center at the end
+		pen.drawString("\"Strobe-splosion\"", w/2-50, h/2);	//places animation title near the center at the end
 	}
 	
 	/**

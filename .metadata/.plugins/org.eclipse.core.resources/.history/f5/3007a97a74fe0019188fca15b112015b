@@ -12,11 +12,10 @@
  * =========
  * 
  * This animation displays: 
- * -Color Change
- * -A Shrinking/Expanding Ball
- * -Linear Movement
- * -Circular Movement
- * -Simple fillString()
+ * Color Change
+ * A Shrinking/Expanding Ball
+ * Linear Movement
+ * Circular Movement
  * 
  * 
  * @author Joey Weber
@@ -87,21 +86,14 @@ public class Animation {
 			sleepClear(win, 1);
 			colorChange(pen, hue, s, br);	//strobing animation
 		}
-		
 		/*
-		 * This block of code was the more complicated to calculate
-		 * the previous two circles are programmed to move oppositely in a circular path.
-		 * The sine methods move the u and y coordinates of the circles
-		 * while cos moves x and v 
+		 * this block of code was the more complicated to calculate
+		 * the previous two circles are programmed to move oppositely in a circular path
+		 * the sine methods move the u and y coordinates of the circles
+		 * while cos moves the x and v
 		 * 
-		 * The loop goes to 180 because that it represents 180 degrees (half a rotation).
-		 * The sin and cos methods require radians so 'i' degrees is converted into radians; i*(pi / 180).
-		 * Because the window's center isn't (0,0), i needed to calculate the a, b, c, and f
-		 * so that they would rotate roughly around (400,400).
-		 * 
-		 * Finally, I needed to type cast a, b, c, and f to int
-		 * after calculating them as doubles to ensure smooth animation.
-		 * 
+		 * the loop goes to 180 because that it represents 180 degrees (half a rotation)
+		 * the sin and cos methods require radians so i degrees is converted into radians (pi / 180)
 		 */
 		for(int i = 0; i <= 180; i++) {
 			pen.fillOval(x, y, d, d);
@@ -116,8 +108,9 @@ public class Animation {
 			u = (int) f;
 			y = (int) a;
 			
-			colorChange(pen, hue, s, br);	//strobing
+			colorChange(pen, hue, s, br);
 			sleepClear(win, 1);
+			System.out.println(x+" "+y);
 		}
 		
 		while(x != w/2 && v != w/2) {
@@ -149,7 +142,7 @@ public class Animation {
 		
 		//Create ending title card
 		pen.setColor(Color.RED);
-		pen.drawString("\"Strobe-splosion!!\"", w/2-50, h/2);	//places animation title near the center at the end
+		pen.drawString("\"Strobe-splosion\"", w/2-50, h/2);	//places animation title near the center at the end
 	}
 	
 	/**
