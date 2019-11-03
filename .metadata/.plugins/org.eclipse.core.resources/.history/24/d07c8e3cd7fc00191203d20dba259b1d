@@ -1,0 +1,6 @@
+
+public class Animation {
+	public static void main(String[] args) {
+		DrawingPanel window = new DrawingPanel(800,800);
+	}
+}

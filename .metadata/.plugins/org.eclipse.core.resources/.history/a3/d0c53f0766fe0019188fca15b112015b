@@ -1,0 +1,106 @@
+/**
+ * This project is to display 
+ * several different animations
+ * using Java Drawing Panel
+ * 
+ * 
+ * 
+ * @author Joey Weber
+ * November 03, 2019
+ */
+
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class Animation {
+	public static void main(String[] args) {
+		DrawingPanel win = new DrawingPanel(800,800);
+		win.setBackground(Color.BLACK);
+		Graphics pen = win.getGraphics();
+		animate(win, pen);
+	}
+	public static void animate(DrawingPanel win, Graphics pen) {
+		
+		int h = win.getHeight(), w = win.getWidth(), d = 1000, direction = 1;
+		
+		int x= (w/2-d/2), y = (h/2-d/2); 
+		int v = 0, u = 0;
+		float hue = 0, s = 0, br = 0;
+		
+		while(d >= 50) {
+			pen.fillOval(x, y, d, d);
+			d -= 10;
+			x= (w/2-d/2); 
+			y = (h/2-d/2);
+			v = x;
+			u = y;
+			colorChange(pen, hue, s, br);
+			sleepClear(win, 10);
+		}
+//		split(x, y, v, u, w, d, direction, win, pen, hue, s, br);
+		while(x != win.getWidth()-100 && v != 100) {
+			pen.fillOval(x, y, d, d);
+			pen.fillOval(v, u, d, d);
+			x += direction;
+			v -= direction;
+			
+			sleepClear(win, 1);
+			colorChange(pen, hue, s, br);
+		}
+		
+		for(int i = 0; i <= 180; i++) {
+			pen.fillOval(x, y, d, d);
+			pen.fillOval(v, u, d, d);
+			double a = 800-((300 *  Math.sin(i*(Math.PI/180)))+400);
+			double b = (300 * Math.cos(i*(Math.PI/180))) + 400;
+			double c = 800-((300 *  Math.cos(i*(Math.PI/180)))+400);
+			double f = 800-((300 *  Math.sin((i+180)*(Math.PI/180)))+400);
+			
+			x = (int) b;
+			v = (int) c;
+			u = (int) f;
+			y = (int) a;
+			
+			colorChange(pen, hue, s, br);
+			sleepClear(win, 1);
+			System.out.println(x+" "+y);
+		}
+//		split(x, y, v, u, w, d, direction, win, pen, hue, s, br);
+		while(x != w/2 && v != w/2) {
+			pen.fillOval(x, y, d, d);
+			pen.fillOval(v, u, d, d);
+			x += direction;
+			v -= direction;
+			
+			sleepClear(win, 1);
+			colorChange(pen, hue, s, br);
+		}
+		while(d <= 1200) {
+			pen.setColor(Color.WHITE);
+			pen.fillOval(x, y, d, d);
+			d += 10;
+			x= (w/2-d/2); 
+			y = (h/2-d/2);
+			v = x;
+			u = y;
+			System.out.println(x+" "+v);
+			win.sleep(1);
+		}
+		
+	
+	
+		
+	}
+	
+	private static Graphics colorChange(Graphics pen, float h, float s, float b) {
+		h += Math.random();
+		s += Math.random();
+		b += 0.3;
+		pen.setColor(Color.getHSBColor(h, s, b));
+		return pen;
+	}
+	private static void sleepClear(DrawingPanel win, int t) {
+		win.sleep(t);
+		win.clear();
+	}
+}

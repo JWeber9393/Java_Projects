@@ -1,0 +1,48 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.Random;
+
+public class Animation {
+	public static void main(String[] args) {
+		DrawingPanel window = new DrawingPanel(800,800);
+		window.setBackground(Color.black);
+		Graphics pen = window.getGraphics();
+		moveRight(window, pen);
+		moveDown(window, pen);
+	}
+	public static void moveRight(DrawingPanel window, Graphics pen) {
+		Random rand = new Random();
+		int x= rand.nextInt(800)+1, y = rand.nextInt(800)+1, d = 50;
+		if(x < window.getWidth()) {
+			while((x+d) <= window.getWidth() || (y+d) <= window.getHeight()) {
+				pen.setColor(Color.GRAY);
+				pen.fillOval(x, y, d, d);
+				x += d/2;
+				y += d/2;
+				window.sleep(50);
+				window.clear();
+			}
+		}
+		else {
+			while(x == 0 || y == 0) {
+				pen.setColor(Color.GRAY);
+				pen.fillOval(x, y, d, d);
+				x -= d/2;
+				y -= d/2;
+				window.sleep(50);
+				window.clear();
+			}
+		}
+	}
+	public static void moveDown(DrawingPanel window, Graphics pen) {
+		int y = 0, d = 50, x= window.getWidth()-d;
+		while(y < window.getHeight()) {
+			pen.setColor(Color.GRAY);
+			pen.fillOval(x, y, d, d);
+			
+			y += d/2;
+			window.sleep(20);
+			window.clear();
+		}
+	}
+}

@@ -1,0 +1,65 @@
+import java.awt.Color;
+import java.awt.Graphics;
+
+public class Animation {
+	public static void main(String[] args) {
+		DrawingPanel window = new DrawingPanel(800,800);
+		window.setBackground(Color.BLACK);
+		Graphics pen = window.getGraphics();
+		animate(window, pen);
+	}
+	public static void animate(DrawingPanel window, Graphics pen) {
+		
+		int h = window.getHeight(), w = window.getWidth(), d = 1000, direction = 1;
+		
+		int x= (w/2-d/2), y = (h/2-d/2);
+		float hue = 0, s = 0, br = 0;
+		
+		while(d >= 50) {
+			pen.fillOval(x, y, d, d);
+			d -= 10;
+			x= (w/2-d/2); 
+			y = (h/2-d/2);
+
+			colorChange(pen, hue, s, br);
+			sleepClear(window, 10);
+		}
+		while(x != w-d-100) {
+			pen.fillOval(x, y, d, d);
+			x += direction;
+			
+			sleepClear(window, 1);
+			colorChange(pen, hue, s, br);
+		}
+		direction*=-1;
+		for(int i = 1; i <= 360; i++) {
+			pen.fillOval(x, y, d, d);
+			double a = 800-((300 *  Math.sin(i*(Math.PI/180)))+400) - d/2;
+			double b = (300 * Math.cos(i*(Math.PI/180))) + 400 - d/2;
+			x = (int) b;
+			y = (int) a;
+			
+			colorChange(pen, hue, s, br);
+			sleepClear(window, 1);
+			//System.out.println(x+" "+y);
+		}
+		while(x != w/2) {
+			pen.fillOval(x, y, d, d);
+			x += direction;
+			
+			sleepClear(window, 1);
+			colorChange(pen, hue, s, br);
+		}
+	}
+	private static Graphics colorChange(Graphics pen, float h, float s, float b) {
+		h += Math.random();
+		s += Math.random();
+		b ++;
+		pen.setColor(Color.getHSBColor(h, s, b));
+		return pen;
+	}
+	private static void sleepClear(DrawingPanel w, int t) {
+		w.sleep(t);
+		w.clear();
+	}
+}

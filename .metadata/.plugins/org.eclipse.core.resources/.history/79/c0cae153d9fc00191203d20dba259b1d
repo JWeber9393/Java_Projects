@@ -1,0 +1,16 @@
+import java.awt.Graphics;
+
+public class Animation {
+	public static void main(String[] args) {
+		DrawingPanel window = new DrawingPanel(800,800);
+		Graphics pen = window.getGraphics();
+		int x= 0, y = 0, d = 20, x1 = x+d, y1 = y+d;
+		for(int i = 0; i < window.getWidth(); i++) {
+			pen.drawOval(x, y, d, d);
+			
+			x += d/4;
+			window.sleep(20);
+			window.clear();
+		}
+	}
+}
